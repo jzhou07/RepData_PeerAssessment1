@@ -31,6 +31,7 @@ mean(totalbydate$total)
 ## [1] 10766
 ```
 
+Mean and median number of steps taken each day
 
 ```r
 allbydate <- aggregate(x = totalbydate$total, by = list(totalbydate$date), function(x) cbind(mean(x), median(x)))
@@ -48,6 +49,7 @@ head(allbydate)
 ```
 
 ## What is the average daily activity pattern?
+Time series plot of the average number of steps taken (averaged across all days) versus the 5-minute intervals
 
 ```r
 meanbyinterval <- aggregate(x = withdata$steps, by = list(withdata$interval), FUN = "mean")
@@ -81,7 +83,7 @@ nrow(nadata)
 ## [1] 2304
 ```
 
-Fill in all of the missing value with the mean valueof that 5-min interval
+To fill in all of the missing value: I used the mean value of that 5-min interval
 
 ```r
 meanbyinterval <- cbind(meanbyinterval, "roundingmean" = round(meanbyinterval$mean, digits = 0))

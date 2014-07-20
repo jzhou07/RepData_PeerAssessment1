@@ -208,6 +208,8 @@ barplot(totalbydate$total, names.arg = totalbydate$date, main = &quot;Total Step
 <pre><code>## [1] 10766
 </code></pre>
 
+<p>Mean and median number of steps taken each day</p>
+
 <pre><code class="r">allbydate &lt;- aggregate(x = totalbydate$total, by = list(totalbydate$date), function(x) cbind(mean(x), median(x)))
 head(allbydate)
 </code></pre>
@@ -222,6 +224,8 @@ head(allbydate)
 </code></pre>
 
 <h2>What is the average daily activity pattern?</h2>
+
+<p>Time series plot of the average number of steps taken (averaged across all days) versus the 5-minute intervals</p>
 
 <pre><code class="r">meanbyinterval &lt;- aggregate(x = withdata$steps, by = list(withdata$interval), FUN = &quot;mean&quot;)
 names(meanbyinterval) &lt;- c(&quot;interval&quot;, &quot;mean&quot;)
@@ -251,7 +255,7 @@ maxmeaninterva
 <pre><code>## [1] 2304
 </code></pre>
 
-<p>Fill in all of the missing value with the mean valueof that 5-min interval</p>
+<p>To fill in all of the missing value: I used the mean value of that 5-min interval</p>
 
 <pre><code class="r">meanbyinterval &lt;- cbind(meanbyinterval, &quot;roundingmean&quot; = round(meanbyinterval$mean, digits = 0))
 nadatanew &lt;- merge(nadata, meanbyinterval, by = &quot;interval&quot;, all.x = TRUE)
